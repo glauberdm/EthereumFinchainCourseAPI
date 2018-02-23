@@ -8,7 +8,7 @@ BigNumber.config({
     EXPONENTIAL_AT: 50
 })
 
-var sendDynastyToken = async (wallet, to, amount) => {
+var sendToken = async (wallet, to, amount) => {
     return await tokenTransaction.transferToken(wallet, to, amount)
 }
 
@@ -28,7 +28,7 @@ var sendTokenAsync = async (req, res) => {
             privateKey: privateKey
         }
 
-        transfer.txHash = await sendDynastyToken(wallet, transfer.to, transfer.amount)
+        transfer.txHash = await sendToken(wallet, transfer.to, transfer.amount)
         transfer.viewTxHash = "https://ropsten.etherscan.io/tx/" + transfer.txHash
 
         response = responseHelper.success({
