@@ -1,0 +1,148 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Ehtereum Finchain Course API
+  description: API for Ehtereum Finchain Course Token
+  contact:
+    name: Finchain - Blockchain Brasil
+    url: www.finchain.com.br - www.blockchainbrasil.com.br
+    email: cursos@finchain.com.br
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /api/v1/
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /balance:
+    x-swagger-router-controller: balance
+    post:
+      description: To balance of user
+      operationId: balance
+      parameters:
+        - in: header
+          name: x-access-token
+          type: string
+          format: uuid
+          required: true
+      responses:
+        200:
+          description: Response
+          schema:
+            $ref: '#/definitions/DataResponse'
+          examples:
+            Balance success:
+              data:
+                amount:
+                  ETH: 3.9610004479963274
+                  ETHFC: 811291.5
+              success: true
+              message:
+                  title: "Balance"
+                  message: "Balance of ETH and ETHFC"
+                  messageId: 511
+            Balance fail:
+              data:
+                amount:
+                  ETH: null
+                  DYN: null
+                balance:
+                  - 
+              success: false
+              message:
+                  title: "Balance of user"
+                  message: "Balance of user in DYN no have possible to get (fail)"
+                  messageId: 510
+  /send_token:
+    x-swagger-router-controller: sendToken
+    post:
+      description: To send token
+      operationId: sendToken
+      parameters:
+        - in: header
+          name: x-access-token
+          type: string
+          format: uuid
+          required: true
+        - in: body
+          name: Transaction token
+          description: Transaction to send token
+          required: true
+          schema:
+            properties:
+              to:
+                type: string
+              amount:
+                type: number
+            example: 
+              to: '0xcDe1DAf4F47D958E2a891B1B6437aA97569c6c7E'
+              amount: 34.7
+      responses:
+        200:
+          description: Response
+          schema:
+            $ref: '#/definitions/DataResponse'
+          examples:
+            Send Token success:
+              data:
+                to: '0xcDe1DAf4F47D958E2a891B1B6437aA97569c6c7E'
+                amount: 34.7
+                txHash: '0xd76da2e47096d5d7a20865e02aa3c3a720d72a9dfb887efbcafd748df9fd844e'
+                viewTxHash: 'https://ropsten.etherscan.io/tx/0xc3470148fb55f49ab87b13d73be8af50f39c87d26a60eb282229eedb229d12f3'
+              success: true
+              message:
+                  title: Send token
+                  message: "34.7 tokens ETHFC was sended to 0xcDe1DAf4F47D958E2a891B1B6437aA97569c6c7E"
+                  messageId: 521
+            Send Token fail (body request in data):
+              data:
+                to: '0xcDe1DAf4F47D958E2a891B1B6437aA97569c6c7E'
+                amount: 34.7
+              success: false
+              message:
+                  title: Send token
+                  message: 34.7 tokens ETHFC was not sended (fail)
+                  messageId: 520
+  /api-doc:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  Response:
+    required:
+      - success
+      - message
+    properties:
+      data:
+        type: object
+      success:
+        type: boolean
+      message:
+        properties:
+          title:
+            type: string
+          message:
+            type: string
+          messageId:
+            type: integer
+    example: 
+      - success: true
+        message:
+            title: ""
+            message: ""
+            messageId: 0
+  DataResponse:
+    required:
+      - data
+    properties:
+      data:
+        type: object
+      schema:
+        $ref: '#/definitions/Response'
