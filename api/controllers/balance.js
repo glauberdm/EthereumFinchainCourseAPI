@@ -36,13 +36,13 @@ var balanceAsync = async (req, res) => {
 
         response = responseHelper.success({
             title: "Balance of user",
-            message: "Balance of user in DYN",
+            message: "Balance of user in ETHFC",
             messageId: 511
         }, data)
     } catch (error) {
         response = responseHelper.fail({
             title: "Balance of user",
-            message: `Balance of user in DYN no have possible to get (${error.message})`,
+            message: `Balance of user in ETHFC no have possible to get (${error.message})`,
             messageId: 510
         }, data)
     } finally {

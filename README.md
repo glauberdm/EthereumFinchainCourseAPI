@@ -1,2 +1,2 @@
-# Dynasty API
+# Ethereum Finchain Course API
 

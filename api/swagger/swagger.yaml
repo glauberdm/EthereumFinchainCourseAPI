@@ -53,13 +53,13 @@ paths:
               data:
                 amount:
                   ETH: null
-                  DYN: null
+                  ETHFC: null
                 balance:
                   - 
               success: false
               message:
                   title: "Balance of user"
-                  message: "Balance of user in DYN no have possible to get (fail)"
+                  message: "Balance of user in ETHFC no have possible to get (fail)"
                   messageId: 510
   /send_token:
     x-swagger-router-controller: sendToken
