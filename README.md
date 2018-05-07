@@ -13,6 +13,7 @@ No console, no diretório do projeto:
 #### Rodando Wallet web app
 `../EthereumFinchainCourseAPI$ npm run start`
 
+#### Testando
 Doc:
 http://localhost:10010/api/v1/doc/
 
