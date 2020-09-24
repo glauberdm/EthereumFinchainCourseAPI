@@ -4,7 +4,7 @@
 
 ### Dependências
 
-* [NodeJS](https://nodejs.org/en/)
+* [NodeJS](https://nodejs.org/en/) v8.12 (Recomendo o uso do [nvm](https://github.com/nvm-sh/nvm) para gerenciamento de versões do NodeJS)
 * [Truffle](https://www.trufflesuite.com)
 
 ### Start Dapp
